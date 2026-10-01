@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-struct NewList: View {
+struct NewListScreen: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
@@ -99,5 +99,5 @@ struct NewList: View {
 }
 
 #Preview {
-    NewList()
+    NewListScreen()
 }
