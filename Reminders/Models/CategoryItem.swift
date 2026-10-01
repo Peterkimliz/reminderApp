@@ -6,13 +6,23 @@
 //
 
 import SwiftUI
-
-struct CategoryItem: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+import SwiftData
+@Model
+class CategoryItem{
+    
+    var name:String
+    var colorCode:String
+    @Relationship(deleteRule: .cascade)
+    var reminders:[ReminderItem] = []
+    
+    init(name: String, colorCode: String) {
+        self.name = name
+        self.colorCode = colorCode
     }
-}
-
-#Preview {
-    CategoryItem()
+    
+    
+    static let listItems = [
+        CategoryItem(name: "Test", colorCode: "white"),
+        CategoryItem(name: "test two", colorCode: "white")
+    ]
 }

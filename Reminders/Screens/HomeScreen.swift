@@ -15,7 +15,7 @@ struct HomeScreen: View {
             
             MyListScreen()
                 .sheet(isPresented: $isPresentingNewListingSheet, content: {
-                   NewList()
+                   NewListScreen()
                 })
                 .toolbar {
                     addNoteToolItem()

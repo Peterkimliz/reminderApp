@@ -10,23 +10,25 @@ import SwiftUI
 
 
 struct SelectedReminderCell: View {
-    
-    
-    @Binding var name :String
-    @Binding var note:String
+    @Binding var selectedReminder:ReminderItem
+
     var body: some View {
         HStack(alignment: .top){
-            Image(systemName: "circle")
+            Image(systemName: selectedReminder.isCompleted ? "largecircle.fill.circle" : "circle")
                 .padding([.trailing],3)
+                .foregroundStyle(selectedReminder.isCompleted ?.blue:.gray)
+                .onTapGesture {
+                    selectedReminder.isCompleted.toggle()
+                }
             
             
             VStack(alignment: .leading){
-                TextField("Name", text: $name,axis: .vertical)
+                TextField("Name", text: $selectedReminder.name,axis: .vertical)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .textFieldStyle(.plain)
                 
-                TextField("Add Note", text: $note,axis: .vertical)
+                TextField("Add Note", text: $selectedReminder.note,axis: .vertical)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .foregroundStyle(.gray)
@@ -53,5 +55,5 @@ struct SelectedReminderCell: View {
 }
 
 #Preview {
-    SelectedReminderCell(name: .constant(""), note: .constant(""))
+    SelectedReminderCell(selectedReminder: .constant(CategoryItem.listItems[0].reminders[0]))
 }

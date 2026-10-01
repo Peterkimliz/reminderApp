@@ -79,7 +79,9 @@ struct NewListScreen: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        let listItem = ListItem(name: listName, colorCode: "String")
+                        let listItem = CategoryItem(
+                                     name: listName,
+                                     colorCode: selectedColor.toHexString() ?? "")
                         context.insert(listItem)
                         dismiss()
                        

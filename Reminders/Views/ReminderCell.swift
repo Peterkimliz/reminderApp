@@ -7,51 +7,52 @@
 
 import SwiftUI
 
+enum ReminderCellEvents{
+    case onChecked(ReminderItem)
+    case onSelected(ReminderItem)
+}
 
-
-struct SelectedReminderCell: View {
+struct ReminderCell: View {
+    let reminder:ReminderItem
+    let onCellItemTap:(ReminderCellEvents)->Void
     
-    
-    @Binding var name :String
-    @Binding var note:String
     var body: some View {
         HStack(alignment: .top){
-            Image(systemName: "circle")
+            Image(systemName: reminder.isCompleted ? "largecircle.fill.circle" : "circle")
                 .padding([.trailing],3)
+                .foregroundStyle(reminder.isCompleted ?.blue:.gray)
+                .onTapGesture {
+                    onCellItemTap(.onChecked(reminder))
+                }
             
             
             VStack(alignment: .leading){
-                TextField("Name", text: $name,axis: .vertical)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .textFieldStyle(.plain)
+                Text(reminder.name.capitalized)
+                    .font(.system(size: 20))
                 
-                TextField("Add Note", text: $note,axis: .vertical)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
+               
+                Text(reminder.note)
+                        .font(.system(size: 16))
                     .foregroundStyle(.gray)
-                    .padding([.top],2)
+        
                 
                 
                 
             }
+            Spacer()
             
             
-        Image(systemName: "info.circle")
+        }.contentShape(RoundedRectangle(cornerRadius: 0))
+         .onTapGesture {
+             onCellItemTap(.onSelected(reminder))
+        }
+       
     }
-    .frame(maxWidth: .infinity)
-    .listRowSeparator(.hidden)
-    .padding()
-    .overlay(
-        RoundedRectangle(cornerRadius: 20)
-        .stroke(.gray.opacity(0.2),lineWidth: 1)
-        .shadow(color:.gray,radius: 0.1))
-    }
-    
-    
+
     
 }
 
 #Preview {
-    SelectedReminderCell(name: .constant(""), note: .constant(""))
+    ReminderCell(reminder: CategoryItem.listItems[0].reminders[0]){(ReminderCellEvents) in
+    }
 }

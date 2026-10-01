@@ -11,20 +11,20 @@ import SwiftData
 @Model
 class ReminderItem{
     var name:String
-    var note:String?
+    var note:String
     var isCompleted:Bool
     var reminderDate:Date?
     var reminderTime:Date?
-    var listItem:ListItem?
+    var listItem:CategoryItem?
     
     
     init(
         name: String,
-        note: String? = nil,
-        isCompleted: Bool,
+        note: String = "",
+        isCompleted: Bool=false,
         reminderDate: Date? = nil,
         reminderTime: Date? = nil,
-        listItem: ListItem? = nil
+        listItem: CategoryItem? = nil
     ) {
         self.name = name
         self.note = note

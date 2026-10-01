@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MyListScreen: View {
-    @Query private var listItems:[ListItem]
+    @Query private var listItems:[CategoryItem]
     
     var body: some View {
         
@@ -22,15 +22,21 @@ struct MyListScreen: View {
         
                     ForEach(listItems) { item in
                         
-                        HStack {
-                            Image(systemName: "line.horizontal.3.circle.fill")
-                            Text(item.name.capitalized)
-                            Spacer()
-                            
-                            Text("\(item.reminders.count)")
-                                .font(.caption)
-                                .foregroundStyle(.gray)
+                        NavigationLink {
+                            ListDetailScreen(category: item)
+                        } label: {
+                            HStack {
+                                Image(systemName: "line.horizontal.3.circle.fill")
+                                    .foregroundStyle(Color(hex:item.colorCode) ?? .green)
+                                Text(item.name.capitalized)
+                                Spacer()
+                                
+                                Text("\(item.reminders.count)")
+                                    .font(.caption)
+                                    .foregroundStyle(.gray)
+                            }
                         }
+
                         
                     }
                 

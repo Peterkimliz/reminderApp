@@ -13,8 +13,7 @@ struct RemindersApp: App {
     var body: some Scene {
         WindowGroup {
             HomeScreen()
-        }
-        .modelContainer(for: ListItem.self)
+        }.modelContainer(for: CategoryItem.self)
         
     }
 }
